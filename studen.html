@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foydalanuvchi</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    
+    <header class="header"></header>
+    <div class="container">
+        <nav class="header__nav">
+            <a href="./index.html">
+                <img src="./images/logo.png" alt="">
+            </a>
+            <div class="header__wrapper">
+                <img src="./images/internet.svg" alt="">
+                <button class="language">O'zb</button>
+            </div>
+            <button class="reset">Log out</button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="student">
+        <div class="container">
+            <div class="student__wrapper">
+                
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // localStorage'dan foydalanuvchi ma'lumotlarini olish
+    const student = JSON.parse(localStorage.getItem("student"));
+    const wrapper = document.querySelector(".student__wrapper");
+    
+    if (student) {
+        // Agar foydalanuvchi ma'lumotlari mavjud bo'lsa, uni chiqarish
+        const coin = document.createElement("h2");
+        const hp = document.createElement("p");
+        const studentName = document.createElement("h2");
+        const group = document.createElement("p");
+
+        coin.textContent = `Coin: ${student.coin}`;
+        hp.textContent = `HP: ${student.hp}`;
+        studentName.textContent = `Ism: ${student.ism}`;
+        group.textContent = `Guruh: ${student.group}`;
+
+        wrapper.append(studentName, coin, hp, group);
+    } else {
+        // Foydalanuvchi ma'lumotlari mavjud bo'lmasa xabar chiqadi
+        wrapper.textContent = "Foydalanuvchi ma'lumotlari topilmadi!";
+    }
+    const logOut = document.querySelector(".reset");
+    logOut.addEventListener("click" ,()=>{
+        // Foydalanuvchi log out qilish uchun localStorage'dan o'chirish
+        localStorage.removeItem("student");
+        location.reload(); // Sahifa yanada qaytadan chiqarish
+        window.location.href = "./index.html"
+    })
+</script>
+</body>
+</html>
